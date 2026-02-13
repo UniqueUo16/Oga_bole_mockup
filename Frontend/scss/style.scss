@@ -37,10 +37,10 @@ body {
 	font-weight: 400;
 	color: lighten($black,60%);
 	&.menu-show {
-		overflow: hidden;
-		position: fixed;
-		height: 100%;
-		width: 100%;
+		// overflow: hidden;
+		// position: fixed;
+		// height: 100%;
+		// width: 100%;
 	}
 }
 a {
@@ -344,6 +344,7 @@ h1, h2, h3, h4, h5,
 		content: '';
 		opacity: .5;
 		background: $black;
+		pointer-events: none;
 	}
 	&.hero-wrap-2{
 		height: 300px;
@@ -410,6 +411,7 @@ h1, h2, h3, h4, h5,
 	&.home-slider {
 		position: relative;
 		height: 750px;
+		overflow: visible !important; // Add this to allow page flow
 		z-index: 0;
 		.slider-item {
 			background-size: cover;
@@ -429,6 +431,7 @@ h1, h2, h3, h4, h5,
 				right: 0;
 				background: $black;
 				opacity: 0;
+				pointer-events: none; // <--- Add this line
 			}
 			.slider-text {
 				height: 750px;
@@ -439,7 +442,7 @@ h1, h2, h3, h4, h5,
 				.one-third{
 					width: 50%;
 					position: relative;
-					z-index: -1;
+					z-index: 2;
 					.overlay{
 						position: absolute;
 						top: 0;
@@ -488,6 +491,8 @@ h1, h2, h3, h4, h5,
 						right: 0;
 						width: 1200px;
 						margin: 0 auto;
+						z-index: 2;
+                pointer-events: auto; // Allow buttons to be clicked
 					}
 					@include media-breakpoint-down(md){
 						width: 100%;
@@ -765,6 +770,7 @@ h1, h2, h3, h4, h5,
 	color: darken($primary,10%);
 	border-bottom: 4px solid lighten($primary,4%);
 }
+
 
 
 //ABOUT
@@ -1980,3 +1986,89 @@ textarea.form-control {
     stroke-dashoffset: -136px;
   }
 }
+// Force the hero and body to behave
+html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+
+.hero-wrap {
+    min-height: 100vh !important; // Forces it to be at least screen height
+    display: block !important;
+}
+
+.home-slider, .slider-item {
+    height: auto !important;
+    min-height: 750px !important;
+    display: block !important;
+    position: relative !important;
+}
+.new-hero {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+
+  .hero-img {
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .hero-text {
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    
+    .text-inner {
+      width: 100%;
+      h1 {
+        font-size: 4.5rem;
+        font-weight: 900;
+        color: #000;
+        line-height: 1;
+      }
+    }
+  }
+
+  .thumb-wrap {
+    gap: 15px;
+    .thumb-item {
+      text-align: center;
+      .t-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-size: cover;
+        margin-bottom: 5px;
+      }
+      h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    }
+  }
+/* Fix for the scattered look */
+.home-slider {
+    overflow: hidden;
+    height: 100vh !important;
+}
+
+.slider-item {
+    height: 100vh !important;
+    position: relative;
+    display: block !important; /* Forces visibility if carousel isn't ready */
+}
+
+/* Ensure the circular thumbnails are actually circles */
+.thumb-menu .img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    display: block;
+    margin: 0 auto 10px;
+}
+}
+
+

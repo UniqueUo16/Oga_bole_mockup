@@ -28,6 +28,137 @@
     <link rel="stylesheet" href="css/style.css">
 
 	<script src="https://cdn.tailwindcss .com"></script>
+	<style>
+	:root {
+  --primary: #ffc107;
+  --dark: #121212;
+  --white: #ffffff;
+  --gray: #f8f9fa;
+}
+
+/* Base Reset for responsiveness */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Changed from height to min-height */
+  overflow: hidden;
+  background: var(--white);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column-reverse; /* Stack: Image on top, text below on mobile */
+  width: 100%;
+}
+
+.hero-text-area {
+  padding: 10% 5%;
+  text-align: center; /* Center text on mobile */
+}
+
+.hero-image-area {
+  width: 100%;
+  height: 40vh; /* Shorter image height for mobile */
+  background: var(--gray);
+  /* Remove the angled cut on mobile so it fills the screen */
+  clip-path: none; 
+}
+
+/* Layout for Tablets and Desktops */
+@media (min-width: 992px) {
+  .hero-slider {
+    height: 100vh;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    height: 100vh;
+    align-items: center;
+  }
+
+  .hero-text-area {
+    padding: 10%;
+    text-align: left; /* Align text left on desktop */
+  }
+
+  .hero-image-area {
+    height: 100%;
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+/* Adjusting the Title for different screens */
+.hero-title {
+  font-size: clamp(2.2rem, 8vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+/* Responsive Menu Previews */
+.menu-previews {
+  display: flex;
+  justify-content: center; /* Center previews on mobile */
+  gap: 15px;
+  margin: 25px 0;
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
+}
+
+@media (min-width: 992px) {
+  .menu-previews {
+    justify-content: flex-start; /* Align left on desktop */
+  }
+}
+
+.preview-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Button responsiveness */
+.hero-actions {
+  display: flex;
+  flex-direction: column; /* Stack buttons on mobile */
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .hero-actions {
+    flex-direction: row; /* Side by side on larger phones */
+    justify-content: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-actions {
+    justify-content: flex-start;
+  }
+}
+
+.btn-main {
+  padding: 15px 30px;
+  background: var(--dark);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+	</style>
   </head>
   <body>
     
@@ -52,71 +183,88 @@
 	  </nav>
     <!-- END nav -->
     
-    <section class="home-slider js-fullheight owl-carousel bg-white">
-      <div class="slider-item js-fullheight">
-      	<div class="overlay"></div>
-        <div class="container-fluid p-0">
-          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-          	<div class="one-third order-md-last img js-fullheight" style="background-image:url(images/slide1.png);">
-          		<div class="overlay"></div>
-          	</div>
-	          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-	          	<div class="text mt-md-5">
-		            <h1 class="mb-4">Bole Wey<br> <span className="text-orange-500">Go Harvard!</span> </h1>
-		            <p>A small Reputable and notable Street food that supplies  with the necessary regelialia. It is a paradisematic country.</p>
-		            <div class="thumb mt-4 mb-3 d-flex">
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/takeaway.png);"></div>
-		            		<h4>Bole X Meat</h4>
-		            	</a>
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/takeaway2.png);"></div>
-		            		<h4>Bole with Turkey~</h4>
-		            	</a>
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/platebole.png);"></div>
-		            		<h4>Chips X chicken</h4>
-		            	</a>
-		            </div>
-		            <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Order UP~</a></p>
-	            </div>
-	          </div>
-        	</div>
+ <section class="hero-slider">
+  <div class="hero-slide active">
+    <div class="hero-content">
+      <div class="hero-text-area">
+        <span class="badge">Street Food. Refined.</span>
+        <h1 class="hero-title">
+          Bole Wey <br> 
+          <span class="highlight">Go Harvard!</span>
+        </h1>
+        <p class="hero-description">
+          A reputable street food experience. Bringing the best flavors 
+          from the roadside to your table with academic precision and flair.
+        </p>
+        
+        <div class="menu-previews">
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/takeaway.png');"></div>
+            <span>Bole X Meat</span>
+          </div>
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/takeaway2.png');"></div>
+            <span>Bole X Turkey</span>
+          </div>
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/platebole.png');"></div>
+            <span>Chips X Chicken</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#" class="btn-main">Order Up ~</a>
+          <a href="#" class="btn-outline">View Menu</a>
         </div>
       </div>
 
-      <div class="slider-item js-fullheight">
-      	<div class="overlay"></div>
-        <div class="container-fluid p-0">
-          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-          	<div class="one-third order-md-last img js-fullheight" style="background-image:url(images/packaging.png);">
-          		<div class="overlay"></div>
-          	</div>
-	          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-	          	<div class="text mt-md-5">
-		            <h1 class="mb-4">We Love <br> Delicious Foods</h1>
-		            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-		            <div class="thumb mt-4 mb-3 d-flex">
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/platebole.png);"></div>
-		            		<h4>Australian Organic Beefs</h4>
-		            	</a>
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/takeaway2.png);"></div>
-		            		<h4>Australian Organic Beef</h4>
-		            	</a>
-		            	<a href="#" class="thumb-menu pr-md-4 text-center">
-		            		<div class="img" style="background-image: url(images/takeaway.png);"></div>
-		            		<h4>Australian Organic Beef</h4>
-		            	</a>
-		            </div>
-		            <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Reserve A Spot</a></p>
-	            </div>
-	          </div>
-        	</div>
+      <div class="hero-image-area">
+        <div class="main-image" style="background-image:url('images/slide1.png');"></div>
+        <div class="image-accent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-slide">
+    <div class="hero-content">
+      <div class="hero-text-area">
+        <span class="badge">Quality First</span>
+        <h1 class="hero-title">
+          We Love <br> 
+          <span class="highlight">Delicious Foods</span>
+        </h1>
+        <p class="hero-description">
+          Premium packaging meets organic ingredients. We ensure every meal 
+          is a masterclass delivered straight to your doorstep.
+        </p>
+
+        <div class="menu-previews">
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/platebole.png');"></div>
+            <span>Grilled Beef</span>
+          </div>
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/takeaway2.png');"></div>
+            <span>Organic Sides</span>
+          </div>
+          <div class="preview-item">
+            <div class="preview-img" style="background-image: url('images/takeaway.png');"></div>
+            <span>Spiced Chicken</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#" class="btn-main">Reserve A Spot</a>
         </div>
       </div>
-    </section>
+
+      <div class="hero-image-area">
+        <div class="main-image" style="background-image:url('images/packaging.png');"></div>
+      </div>
+    </div>
+  </div>
+</section>
+	
 	
 
 		<section class="ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
